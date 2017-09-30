@@ -1,49 +1,57 @@
-<html>
-    <head>
-
-        <!-- Styling -->
-        <style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SamboPank</title>
+</head>
+<body>
+    <header><h1>SamboPank</h1><h3>Sinuga tähtede poole</h3></header>
+    <div id='content'>
+        <h3>Hea artikkel</h3>
+        <p>
+            Ipsum libre alle malle, parimad pakkumised jne
+            Ipsum libre alle malle, parimad pakkumised jne
+            Ipsum libre alle malle, parimad pakkumised jne
+            Ipsum libre alle malle, parimad pakkumised jne
+            Ipsum libre alle malle, parimad pakkumised jne
+        </p>
+        Choose a time that suits you best <br>
+        <input type="radio" id='mil' name='millal' value='morning'> Morning
+        <input type="radio" id='mil' name='millal' value='evening'> Evening
         
-        </style>
-    </head>
-
-    <body>
-        <!-- Header -->
-        <div id="headContainer">
-
-        </div>
-        <!-- Body -->
-        <div id="bodyContainer">
-            <!-- LOGIN -->
-            <div id='login'>
-                <input type="email" id='inputUN'>
-                <input type="password" id='inputPW'>
-                <hr>
-                <button id="btn-login">LogIn</button>
+        <div id="csContainer">
+            <!-- MagicButton -->
+            <div>
+                <button onclick="setDate();">M</button>
             </div>
-            <!-- When LOGIN => Success -->
-            <div id='infContainer' hidden>
-                <!-- CHANGE USERDATA HERE -->
-                <div id="conf">
-                    <label for="firstname"></label>
-                    <input type="text" name="firstname" placeholder="firstname">
-                    <button>Save changes</button>
-                </div>
-                <!-- HERE'S THE MEETINGS BOX -->
-                <div id="meetings">
-                    <!-- PUT MEETINGS HERE -->
-                    
-                </div>
+            <!-- LogIn, appears when session tokens doesn't work -->
+            <div hidden>
+                <input type="text" placeholder="Username">
+                <input type="text" placeholder="Password">
+                <input type="button" value="✅">
             </div>
         </div>
-        <!-- Footer -->
-        <div id="footerContainer">
+    </div>
+    <footer>
+        Tel: <a href="tel:+37200000000">+37200000000</a>
+        Email: custserved@sambonk.ee
+    </footer>
 
-        </div>
+    <script>
+        // Send post to M server and wait for the response 
+        var setDate = function() {
+            // Get date from the page
+            if (document.querySelector('input[name = "millal"]:checked')) {
+            var d = document.querySelector('input[name = "millal"]:checked').value;
+            // Pane kuupäev teele
+        
+        
+            }
+        };
 
-
-        <script>
-
-        </script>
-    </body>
+        
+    </script>
+</body>
 </html>
