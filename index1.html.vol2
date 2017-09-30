@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Maagiline nupp</title>
+  
+  
+      <style>
+        ::-webkit-input-placeholder { /* Chrome */
+          color: white;
+          transition: opacity 250ms ease-in-out;
+        }
+      </style>
+      <link rel="stylesheet" href="style.css">
+
+  
+</head>
+
+<body>
+  <div id="clouds">
+	<div class="cloud x1"></div>
+	<!-- Time for multiple clouds to dance around -->
+	<div class="cloud x2"></div>
+	<div class="cloud x3"></div>
+	<div class="cloud x4"></div>
+	<div class="cloud x5"></div>
+</div>
+
+ <div class="container">
+
+
+      <div id="login">
+
+        <form method="post">
+
+          <fieldset class="clearfix">
+
+            <p><span class="fontawesome-user" style="color:white;"></span><input type="text" placeholder="Username" style="color:white;"></p> 
+            <p><span class="fontawesome-lock" style="color:white;"></span><input type="password"  placeholder="Password"></p> 
+            <p><input type="submit" value="LogIn" style="background-color:#4CAF50"></p>
+
+          </fieldset>
+
+        </form>
+        <br>
+        <p style="color:white">Don't have a user? <br><a href="#" class="blue">You can try to make one</a><span class="fontawesome-arrow-right"></span></p>
+
+      </div> <!-- end login -->
+
+    </div>
+</body>
+</html>

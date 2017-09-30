@@ -1,0 +1,42 @@
+
+// Request conf
+x-www-form-urlencoded
+
+// Creating a new user
+url: url+'/new/user'
+
+key	value
+un	<insert username>
+pw	<insert password>
+
+// Creating a new client
+url: url+'/new/client'
+
+key 	value
+dca	<DataCollectionAddress>
+name	<NameOfTheClient{special aka unique}>
+
+// Logging in
+
+key 	value
+un 	<insert username>
+pw	<insert password>
+
+returns 
+- ON Success -
+{
+success:1,
+{
+	username:'username',
+	personalData: {
+		firstname :'firstname',
+		lastname  :'lastname',
+		tel             :'tel'
+	}
+}
+}
+- ON FAILURE -
+{
+	success:0,
+	content:'User not found'
+}

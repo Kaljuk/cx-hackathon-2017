@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Maagiline nupp</title>
+  
+  
+      <style>
+        ::-webkit-input-placeholder { /* Chrome */
+          color: white;
+          transition: opacity 250ms ease-in-out;
+        }
+        .alus {
+          background-color: #2c506b;
+        }
+        .uconf {
+          margin: 5px;
+          padding: 5px;
+          margin-top: 0px;
+          right: 0;
+        }
+        .ulabel {
+          margin: 0px 5px;
+          vertical-align:bottom;
+        }
+      </style>
+      <link rel="stylesheet" href="style.css">
+
+  
+</head>
+
+<body class="alus">
+  <div id="clouds">
+    <div class="cloud x1"></div>
+    <!-- Time for multiple clouds to dance around -->
+    <div class="cloud x2"></div>
+    <div class="cloud x3"></div>
+    <div class="cloud x4"></div>
+    <div class="cloud x5"></div>
+  </div>
+
+  <div class="container">
+
+
+    <div id="login">
+      <form method="post" action="">
+        <fieldset class="clearfix">
+          <p><span class="fontawesome-user" style="color:white;"></span><input type="text" id='unin' placeholder="Username" style="color:white;"></p> 
+          <p><span class="fontawesome-lock" style="color:white;"></span><input type="password"  id='pwin' placeholder="Password" style="color:white;"></p> 
+          <p><input type="button" class="btn" value="login" onclick='dologin();' style="background-color:#4CAF50; margin-top:10%;"></p>
+        </fieldset>
+      </form>
+      <br>
+      <p style="color:white">Don't have a user? <br><a href="javascript:;" class="blue">You can try to make one</a><span class="fontawesome-arrow-right"></span></p>
+    </div> <!-- end login -->
+
+    <!-- WHEN LOGIN SUCCESS -->
+    <div id="userContainer" hidden>
+      <div id="confContainer" style="background-color:white;">
+          <label class="ulabel" for="fname">First Name</label><br>
+          <span><input type="text" name="fname" id="fname" class='uconf' placeholder="First name" style="color:white;background-color:#2c506b"></span></span><br>
+          <label class="ulabel" for="lname">Last Name</label><br>
+          <span><input type="text" name="lname" id="lname" class='uconf' placeholder="Last name" style="color:white;background-color:#2c506b"></span><br>
+          <label class="ulabel" for="lname">Tel.</label><br>
+          <span><input type="tel" id="tel" class='uconf' placeholder="XXX-XXXX-XXXX" style="color:white;background-color:#2c506b"></span><br>
+          <label class="ulabel" for="lname">Email</label><br>
+          <span><input type="email" id="email" class='uconf' placeholder="E-mail" style="color:white;background-color:#2c506b"></span>
+          <hr>
+          <button onclick='saveChanges();'>Save changes</button>
+          <button style="float:right;" onclick='logout();'>LogOut</button>
+      </div>
+      <div id="ccdContainer">
+
+      </div>
+    </div>
+
+
+  </div>
+
+  <script>
+
+
+    // If login unsuccessful -> show it 
+    var loginSuccess = function(content) {
+      // Hide login stuff
+      var loginBox = document.getElementById('login');
+      var usercBox = document.getElementById('userContainer');
+      loginBox.hidden = true;
+      usercBox.hidden = false;
+      // Insert values
+      var pd = content;
+      console.log(pd);
+      document.getElementById('fname').value = pd.firstname;
+      document.getElementById('lname').value = pd.lastname;
+      document.getElementById('tel').value = pd.tel;
+      document.getElementById('email').value = pd.email;
+    }
+    // If login success, hide login and show config and other info
+
+
+    // Login script
+    var dologin = function() {
+      // Get un and pw
+      var un = document.getElementById('unin').value;
+      var pw = document.getElementById('pwin').value;
+      console.log(un,pw);
+      // Check user credentials
+      var xml = new XMLHttpRequest();
+      var url = 'http://127.0.0.1:1337/login';
+      var params = "un="+un+"&pw="+pw;
+      xml.open("POST", url, true);
+      // Header
+      xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+      xml.onreadystatechange = function() {//Call a function when the state changes.
+          if(xml.readyState == 4 && xml.status == 200) {
+              var r = JSON.parse(xml.responseText);
+              console.log(r, '\n', r.success, r.success==1);
+              if (r.success == 1) {
+                loginSuccess(r.content.personalData);
+              }
+          }
+      }
+      xml.send(params);
+    }
+
+    var saveChanges = function() {
+      // Get un and pw
+      var un = document.getElementById('unin').value;
+      var pw = document.getElementById('pwin').value;
+      // Check user credentials
+      var xml = new XMLHttpRequest();
+      var url = 'http://127.0.0.1:1337/changedata/user';
+      var newdata = {
+        firstname   : document.getElementById('fname').value,
+        lastname    : document.getElementById('lname').value,
+        tel         : document.getElementById('tel').value,
+        email       : document.getElementById('email').value,
+      };
+      console.log('newdata', newdata, JSON.stringify(newdata));
+      var params = "un="+un+"&pw="+pw+"&newdata="+JSON.stringify(newdata);
+      console.log(params);
+      xml.open("POST", url, true);
+      // Header
+      xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+      xml.onreadystatechange = function() {//Call a function when the state changes.
+          if(xml.readyState == 4 && xml.status == 200) {
+              var r = JSON.parse(xml.responseText);
+              console.log(r, '\n', r.success, r.success==1);
+              if (r.success == 1) {
+                //loginSuccess();
+              }
+          }
+      }
+      xml.send(params);  
+
+    };
+
+
+    // Log Out
+    var logout = function () {
+      location.reload();
+    };
+  </script>
+
+</body>
+</html>
